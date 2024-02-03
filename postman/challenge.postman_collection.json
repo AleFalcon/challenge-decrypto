@@ -1,0 +1,264 @@
+{
+	"info": {
+		"_postman_id": "baeb1b3b-5ae9-48a6-ad5b-ae3f89e1241b",
+		"name": "challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20095419"
+	},
+	"item": [
+		{
+			"name": "Comitente",
+			"item": [
+				{
+					"name": "Create Comitente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"Comitente3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/comitente",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comitente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Comitente",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"addMarkets\": [\"MAE\", \"ROFEX\"],\n    \"deleteMarkets\": [\"MAE\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/comitente/Comitente3/markets",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comitente",
+								"Comitente3",
+								"markets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Comitente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/comitente/Comitente3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comitente",
+								"Comitente3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Country",
+			"item": [
+				{
+					"name": "Create Country",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Brasil\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/country",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"country"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Country",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"oldName\": \"Brasil\",\n    \"newName\": \"Colombia\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/country",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"country"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Country",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/country/Colombia",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"country",
+								"Colombia"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Market",
+			"item": [
+				{
+					"name": "Create Market",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"code\": \"AAA\",\n    \"description\": \"Super market\",\n    \"country\": \"Argentina\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/market",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"market"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Market",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"code\": \"AAA\",\n    \"description\": \"Super mega market\",\n    \"country\": \"Argentina\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/market",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"market"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Market",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/market/AAA",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"market",
+								"AAA"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/status",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"status"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
