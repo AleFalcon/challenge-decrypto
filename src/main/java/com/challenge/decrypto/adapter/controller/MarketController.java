@@ -7,6 +7,7 @@ import com.challenge.decrypto.application.port.in.DeleteMarketPort;
 import com.challenge.decrypto.application.port.in.PostCreateMarketPort;
 import com.challenge.decrypto.application.port.in.PutModifyMarketPort;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Validated
 @RestController
+@Slf4j
 @Tag(name = "Market Controller", description = "CRUD for market ")
 @RequestMapping("/market")
 public class MarketController {
@@ -32,18 +34,24 @@ public class MarketController {
         this.deleteMarketPort = deleteMarketPort;
     }
     @PostMapping()
-    public ResponseEnvelope<Void> createCountry(@RequestBody @Validated CreateMarketRequest createMarketRequest) {
+    public ResponseEnvelope<Void> createMarket(@RequestBody @Validated CreateMarketRequest createMarketRequest) {
+        log.info(">> Inicio de creación de mercado");
         postCreateMarketPort.createMarket(createMarketRequest.toCommand());
+        log.info("<< Finalizó la creación de mercado");
         return new ResponseEnvelope<>(HttpStatus.CREATED.value(), HttpStatus.CREATED.getReasonPhrase());
     }
     @PatchMapping()
     public ResponseEnvelope<Void> updateMarket(@RequestBody @Validated UpdateMarketRequest updateMarketRequest) {
+        log.info(">> Inicia de modificación del mercado: " + updateMarketRequest.getCode());
         putModifyMarketPort.updatesMarket(updateMarketRequest.toCommand());
+        log.info("<< Finalizó la modificación del mercado");
         return new ResponseEnvelope<>(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.getReasonPhrase());
     }
     @DeleteMapping("/{marketCode}")
     public ResponseEnvelope<Void> deleteMarket(@PathVariable String marketCode) {
+        log.info(">> Inicio de eliminación de mercado: " + marketCode);
         deleteMarketPort.deleteMarket(marketCode);
+        log.info("<< Finalizó la eliminación de mercado");
         return new ResponseEnvelope<>(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.getReasonPhrase());
     }
 }

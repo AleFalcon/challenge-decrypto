@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import java.util.List;
 
 @Validated
 @RestController
+@Slf4j
 @Tag(name = "Information Controller", description = "Obtain information from database")
 public class InformationController {
     private final GetStatusPort getStatusPort;
@@ -66,11 +68,13 @@ public class InformationController {
                     "}")))
     public ResponseEnvelope<List<StatusResponse>> getStatus() {
         List<StatusResponse> result = new ArrayList<>();
+        log.info(">> Inicia la obtención y procesamiento de datos");
         List<StatusDomain> statuesDomain = getStatusPort.getStatus();
         for(StatusDomain statusDomain : statuesDomain) {
+            log.info(">> Inicia la transformación del dominio al response");
             result.add(StatusResponse.fromDomain(statusDomain));
         }
-
+        log.info("<< Finalizó el procesamiento");
         return new ResponseEnvelope<>(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), result);
     }
 }

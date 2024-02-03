@@ -7,6 +7,7 @@ import com.challenge.decrypto.application.port.in.DeleteCountryPort;
 import com.challenge.decrypto.application.port.in.PostCreateCountryPort;
 import com.challenge.decrypto.application.port.in.PutModifyCountryPort;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Validated
 @RestController
+@Slf4j
 @Tag(name = "Country Controller", description = "CRUD for Country ")
 @RequestMapping("/country")
 public class CountryController {
@@ -33,17 +35,23 @@ public class CountryController {
     }
     @PostMapping()
     public ResponseEnvelope<Void> createCountry(@RequestBody @Validated CreateCountryRequest createCountryRequest) {
+        log.info(">> Inicio de creación de país");
         postCreateCountryPort.createCountry(createCountryRequest.toCommand());
+        log.info("<< Finalizó la creación del país");
         return new ResponseEnvelope<>(HttpStatus.CREATED.value(), HttpStatus.CREATED.getReasonPhrase());
     }
     @PatchMapping()
     public ResponseEnvelope<Void> updateCountry(@RequestBody @Validated UpdateCountryRequest updateCountryRequest) {
+        log.info(">> Inicia de modificación del país: " + updateCountryRequest.getOldName());
         putModifyCountryPort.updatesCountry(updateCountryRequest.toCommand());
+        log.info("<< Finalizó la modificación del país");
         return new ResponseEnvelope<>(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.getReasonPhrase());
     }
     @DeleteMapping("/{country}")
     public ResponseEnvelope<Void> deleteCountry(@PathVariable String country) {
+        log.info(">> Inicio de eliminación de país: " + country);
         deleteCountryPort.deleteCountry(country);
+        log.info("<< Finalizó la eliminación de país");
         return new ResponseEnvelope<>(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.getReasonPhrase());
     }
 }

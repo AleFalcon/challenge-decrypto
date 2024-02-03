@@ -6,6 +6,7 @@ import com.challenge.decrypto.application.port.out.CountryDataBase;
 import com.challenge.decrypto.domain.CountryDomain;
 import com.challenge.decrypto.domain.MarketDomain;
 import com.challenge.decrypto.domain.StatusDomain;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
+@Slf4j
 public class GetStatusUseCase implements GetStatusPort {
     private final ComitenteDataBase comitenteDataBase;
     private final CountryDataBase countryDataBase;
@@ -25,11 +27,13 @@ public class GetStatusUseCase implements GetStatusPort {
     @Override
     @Cacheable(value = "status", key = "#root.method.name")
     public List<StatusDomain> getStatus() {
+        log.info(">> Ingreso al caso de uso obtención de estado.");
         List<StatusDomain> statuesDomain = new ArrayList<>();
         List<CountryDomain> countriesDomain = countryDataBase.getAllInformation();
         for(CountryDomain country: countriesDomain) {
             statuesDomain.add(generateMarketWithCountryInformation(country));
         }
+        log.info("<< Finalizó la ejecución del CU de obtención de estado.");
         return statuesDomain;
     }
     private StatusDomain generateMarketWithCountryInformation(CountryDomain country) {
