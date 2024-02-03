@@ -25,5 +25,12 @@ public class CountryEntity {
     public CountryEntity(String name) {
         this.name = name;
     }
+    public CountryEntity(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
     public CountryEntity() {}
+    public static CountryEntity fromDomain(CountryDomain countryDomain) {
+        return new CountryEntity(countryDomain.getId(), countryDomain.getName());
+    }
 }

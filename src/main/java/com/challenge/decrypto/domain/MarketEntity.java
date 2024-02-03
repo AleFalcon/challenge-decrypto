@@ -35,6 +35,14 @@ public class MarketEntity {
         this.country = countryEntity;
         this.comitentes = new HashSet<>();
     }
+    public MarketEntity(Long id, String code, String description) {
+        this.id = id;
+        this.code = code;
+        this.description = description;
+    }
+    public MarketEntity(Long id) {
+        this.id = id;
+    }
     public MarketEntity() {}
     public void addComitente(ComitenteEntity comitenteEntity) {
         comitentes.add(comitenteEntity);

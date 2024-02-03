@@ -35,4 +35,22 @@ public class ComitenteEntity {
         this.description= description;
         this.markets = new HashSet<>();
     }
+    public ComitenteEntity(String description, Set<MarketEntity> markets){
+        this.description= description;
+        this.markets = markets;
+    }
+    public ComitenteEntity(Long id, String description, Set<MarketEntity> markets){
+        this.id = id;
+        this.description= description;
+        this.markets = markets;
+    }
+    public static ComitenteEntity fromDomain(ComitenteDomain comitenteDomain) {
+        Set<MarketEntity> marketsEntity = new HashSet<>();
+        if (comitenteDomain.getMarkets() != null) {
+            comitenteDomain.getMarkets().forEach(marketDomain ->
+                    marketsEntity.add(new MarketEntity(marketDomain.getId()))
+            );
+        }
+        return new ComitenteEntity(comitenteDomain.getId(), comitenteDomain.getDescription(), marketsEntity);
+    }
 }
