@@ -8,7 +8,7 @@ import java.util.Map;
 
 @Builder
 @Getter
-public class StatusDomain {
+public class StatsDomain {
     private String country;
     private List<Map<String, Object>> market;
 }

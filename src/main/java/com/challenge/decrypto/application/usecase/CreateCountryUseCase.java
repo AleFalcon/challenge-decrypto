@@ -15,7 +15,7 @@ public class CreateCountryUseCase implements PostCreateCountryPort {
         this.countryDataBase = countryDataBase;
     }
     @Override
-    @CacheEvict(value = "status", key = "#root.method.name")
+    @CacheEvict(value = "stats", key = "#root.method.name")
     public void createCountry(Command command) {
         log.info(">> Ingreso al caso de uso de creación de país.");
         countryDataBase.saveCountry(CountryDomain.builder().name(command.getName()).build());

@@ -1,9 +1,9 @@
 package com.challenge.decrypto.adapter.controller;
 
 import com.challenge.decrypto.adapter.controller.models.out.ResponseEnvelope;
-import com.challenge.decrypto.adapter.controller.models.out.StatusResponse;
-import com.challenge.decrypto.application.port.in.GetStatusPort;
-import com.challenge.decrypto.domain.StatusDomain;
+import com.challenge.decrypto.adapter.controller.models.out.StatsResponse;
+import com.challenge.decrypto.application.port.in.GetStatsPort;
+import com.challenge.decrypto.domain.StatsDomain;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
@@ -24,14 +24,14 @@ import java.util.List;
 @Slf4j
 @Tag(name = "Information Controller", description = "Obtain information from database")
 public class InformationController {
-    private final GetStatusPort getStatusPort;
+    private final GetStatsPort getStatsPort;
 
-    public InformationController(GetStatusPort getStatusPort) {
-        this.getStatusPort = getStatusPort;
+    public InformationController(GetStatsPort getStatsPort) {
+        this.getStatsPort = getStatsPort;
     }
 
-    @GetMapping("/status")
-    @Operation(summary = "Get status", description = "Devuelve el porcentaje de comitentes por mercado que existen por país.")
+    @GetMapping("/stats")
+    @Operation(summary = "Get stats", description = "Devuelve el porcentaje de comitentes por mercado que existen por país.")
     @ApiResponse(responseCode = "200", description = "Successful operation", content = @Content(
             mediaType = "application/json",
             schema = @Schema(implementation = ResponseEnvelope.class),
@@ -66,13 +66,13 @@ public class InformationController {
                     "        }\n" +
                     "    ]\n" +
                     "}")))
-    public ResponseEnvelope<List<StatusResponse>> getStatus() {
-        List<StatusResponse> result = new ArrayList<>();
+    public ResponseEnvelope<List<StatsResponse>> getStats() {
+        List<StatsResponse> result = new ArrayList<>();
         log.info(">> Inicia la obtención y procesamiento de datos");
-        List<StatusDomain> statuesDomain = getStatusPort.getStatus();
-        for(StatusDomain statusDomain : statuesDomain) {
+        List<StatsDomain> statsDomain = getStatsPort.getStats();
+        for(StatsDomain statDomain : statsDomain) {
             log.info(">> Inicia la transformación del dominio al response");
-            result.add(StatusResponse.fromDomain(statusDomain));
+            result.add(StatsResponse.fromDomain(statDomain));
         }
         log.info("<< Finalizó el procesamiento");
         return new ResponseEnvelope<>(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), result);

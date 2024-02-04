@@ -20,7 +20,7 @@ public class CreateMarketUseCase implements PostCreateMarketPort {
         this.countryDataBase = countryDataBase;
     }
     @Override
-    @CacheEvict(value = "status", key = "#root.method.name")
+    @CacheEvict(value = "stats", key = "#root.method.name")
     public void createMarket(Command command) {
         log.info(">> Ingreso al caso de uso de creación del mercado.");
         CountryDomain countryDomain = countryDataBase.getInformationCountry(

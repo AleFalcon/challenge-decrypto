@@ -16,7 +16,7 @@ public class UpdateModifyCountryUseCase implements PutModifyCountryPort {
         this.countryDataBase = countryDataBase;
     }
     @Override
-    @CacheEvict(value = "status", key = "#root.method.name")
+    @CacheEvict(value = "stats", key = "#root.method.name")
     public void updatesCountry(Command command) {
         log.info(">> Ingreso al caso de uso de modificación de pais.");
         CountryDomain countryDomain = countryDataBase.getInformationCountry(new CountryEntity(command.getOldName()));

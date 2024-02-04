@@ -15,7 +15,7 @@ public class DeleteMarket implements DeleteMarketPort {
         this.marketDataBase = marketDataBase;
     }
     @Override
-    @CacheEvict(value = "status", key = "#root.method.name")
+    @CacheEvict(value = "stats", key = "#root.method.name")
     public void deleteMarket(String name) {
         log.info(">> Ingreso al caso de uso de eliminación de mercado.");
         MarketDomain marketDomain = marketDataBase.getMarketInformation(name);

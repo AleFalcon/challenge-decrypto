@@ -15,7 +15,7 @@ public class CreateComitenteUseCase implements PostCreateComitentePort {
         this.comitenteDataBase = comitenteDataBase;
     }
     @Override
-    @CacheEvict(value = "status", key = "#root.method.name")
+    @CacheEvict(value = "stats", key = "#root.method.name")
     public void createComitente(Command command) {
         log.info(">> Ingreso al caso de uso de creación del comitente");
         comitenteDataBase.saveComitente(ComitenteDomain.builder().description(command.getDescription()).build());

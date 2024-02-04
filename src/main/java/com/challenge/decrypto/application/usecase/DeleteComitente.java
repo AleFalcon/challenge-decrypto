@@ -18,7 +18,7 @@ public class DeleteComitente implements DeleteComitentePort {
     }
 
     @Override
-    @CacheEvict(value = "status", key = "#root.method.name")
+    @CacheEvict(value = "stats", key = "#root.method.name")
     public void deleteComitente(String description) {
         log.info(">> Ingreso al caso de uso de eliminación de comitente.");
         ComitenteDomain comitenteDomain = comitenteDataBase.getComitenteInformation(new ComitenteEntity(description));

@@ -25,7 +25,7 @@ public class DeleteCountry implements DeleteCountryPort {
         this.comitenteDataBase = comitenteDataBase;
     }
     @Override
-    @CacheEvict(value = "status", key = "#root.method.name")
+    @CacheEvict(value = "stats", key = "#root.method.name")
     public void deleteCountry(String name) {
         log.info(">> Ingreso al caso de uso de eliminación de país.");
         CountryDomain countryDomain = countryDataBase.getInformationCountry(new CountryEntity(name));

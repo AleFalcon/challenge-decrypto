@@ -20,7 +20,7 @@ public class UpdateModifyComitenteUseCase implements PutModifyComitentePort {
         this.marketDataBase = marketDataBase;
     }
     @Override
-    @CacheEvict(value = "status", key = "#root.method.name")
+    @CacheEvict(value = "stats", key = "#root.method.name")
     public void updatesMarketsForComitente(Command command) {
         log.info(">> Ingreso al caso de uso de agregado/eliminación de mercados a un comitente.");
         ComitenteDomain comitenteDomain = comitenteDataBase.getComitenteInformation(new ComitenteEntity(command.getDescription()));

@@ -20,7 +20,7 @@ public class UpdateModifyMarketUseCase implements PutModifyMarketPort {
         this.marketDataBase = marketDataBase;
     }
     @Override
-    @CacheEvict(value = "status", key = "#root.method.name")
+    @CacheEvict(value = "stats", key = "#root.method.name")
     public void updatesMarket(Command command) {
         log.info(">> Ingreso al caso de uso de modificación del mercado.");
         CountryDomain countryDomain = countryDataBase.getInformationCountry(new CountryEntity(command.getCountry()));
