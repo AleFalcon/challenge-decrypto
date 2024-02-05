@@ -6,7 +6,6 @@ import lombok.Value;
 public interface PutModifyMarketPort {
     void updatesMarket(Command command);
 
-    //@Schema(description = "New name for country.")
     @Value
     @Builder
     class Command {
