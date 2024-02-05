@@ -50,4 +50,4 @@ Todos los test se ejecutan correctamente. Para esto, podemos hacer click derecho
 * **Importa la colección de Postman** que se encuentra en **'postman/'**, con el nombre **'challenge.postman_collection.json'**.
 Para hacerlo, ve a **'File -> Import -> Seleccionar el archivo mencionado'**.
 * A su vez, se disponibiliza un swagger para poder acceder a la documentación de los endpoints en la gisuiente url: ```http://{server}:{port}/swagger-ui```
-por ejemplo, si se levanta local, ```server = localhost``` y ```puerto = 8080```
+por ejemplo, si se se accede al swagger de prod la url seria: ```https://challenge-decrypto-production.up.railway.app/swagger-ui/index.html```
