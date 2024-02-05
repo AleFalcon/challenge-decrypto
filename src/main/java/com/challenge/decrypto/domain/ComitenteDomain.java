@@ -16,8 +16,10 @@ public class ComitenteDomain {
     private Set<MarketDomain> markets;
     public static ComitenteDomain fromModel(ComitenteEntity comitenteEntity){
         Set<MarketDomain> marketsDomain = new HashSet<>();
-        for(MarketEntity market : comitenteEntity.getMarkets()) {
-            marketsDomain.add(MarketDomain.fromModel(market));
+        if (comitenteEntity.getMarkets() != null) {
+            for (MarketEntity market : comitenteEntity.getMarkets()) {
+                marketsDomain.add(MarketDomain.fromModel(market));
+            }
         }
         return ComitenteDomain.builder()
                 .id(comitenteEntity.getId())

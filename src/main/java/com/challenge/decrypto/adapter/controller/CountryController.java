@@ -9,6 +9,7 @@ import com.challenge.decrypto.application.port.in.PutModifyCountryPort;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -34,24 +35,27 @@ public class CountryController {
         this.deleteCountryPort = deleteCountryPort;
     }
     @PostMapping()
-    public ResponseEnvelope<Void> createCountry(@RequestBody @Validated CreateCountryRequest createCountryRequest) {
+    public ResponseEntity<ResponseEnvelope<Void>> createCountry(@RequestBody @Validated CreateCountryRequest createCountryRequest) {
         log.info(">> Inicio de creación de país");
         postCreateCountryPort.createCountry(createCountryRequest.toCommand());
         log.info("<< Finalizó la creación del país");
-        return new ResponseEnvelope<>(HttpStatus.CREATED.value(), HttpStatus.CREATED.getReasonPhrase());
+        ResponseEnvelope<Void> envelope = new ResponseEnvelope<>(HttpStatus.CREATED.value(), HttpStatus.CREATED.getReasonPhrase());
+        return new ResponseEntity<>(envelope, HttpStatus.CREATED);
     }
     @PatchMapping()
-    public ResponseEnvelope<Void> updateCountry(@RequestBody @Validated UpdateCountryRequest updateCountryRequest) {
+    public ResponseEntity<ResponseEnvelope<Void>> updateCountry(@RequestBody @Validated UpdateCountryRequest updateCountryRequest) {
         log.info(">> Inicia de modificación del país: " + updateCountryRequest.getOldName());
         putModifyCountryPort.updatesCountry(updateCountryRequest.toCommand());
         log.info("<< Finalizó la modificación del país");
-        return new ResponseEnvelope<>(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.getReasonPhrase());
+        ResponseEnvelope<Void> envelope = new ResponseEnvelope<>(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.getReasonPhrase());
+        return new ResponseEntity<>(envelope, HttpStatus.NO_CONTENT);
     }
     @DeleteMapping("/{country}")
-    public ResponseEnvelope<Void> deleteCountry(@PathVariable String country) {
+    public ResponseEntity<ResponseEnvelope<Void>> deleteCountry(@PathVariable String country) {
         log.info(">> Inicio de eliminación de país: " + country);
         deleteCountryPort.deleteCountry(country);
         log.info("<< Finalizó la eliminación de país");
-        return new ResponseEnvelope<>(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.getReasonPhrase());
+        ResponseEnvelope<Void> envelope = new ResponseEnvelope<>(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.getReasonPhrase());
+        return new ResponseEntity<>(envelope, HttpStatus.NO_CONTENT);
     }
 }

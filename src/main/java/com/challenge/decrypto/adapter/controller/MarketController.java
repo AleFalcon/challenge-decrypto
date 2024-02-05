@@ -9,6 +9,7 @@ import com.challenge.decrypto.application.port.in.PutModifyMarketPort;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -34,24 +35,27 @@ public class MarketController {
         this.deleteMarketPort = deleteMarketPort;
     }
     @PostMapping()
-    public ResponseEnvelope<Void> createMarket(@RequestBody @Validated CreateMarketRequest createMarketRequest) {
+    public ResponseEntity<ResponseEnvelope<Void>> createMarket(@RequestBody @Validated CreateMarketRequest createMarketRequest) {
         log.info(">> Inicio de creación de mercado");
         postCreateMarketPort.createMarket(createMarketRequest.toCommand());
         log.info("<< Finalizó la creación de mercado");
-        return new ResponseEnvelope<>(HttpStatus.CREATED.value(), HttpStatus.CREATED.getReasonPhrase());
+        ResponseEnvelope<Void> envelope = new ResponseEnvelope<>(HttpStatus.CREATED.value(), HttpStatus.CREATED.getReasonPhrase());
+        return new ResponseEntity<>(envelope, HttpStatus.CREATED);
     }
     @PatchMapping()
-    public ResponseEnvelope<Void> updateMarket(@RequestBody @Validated UpdateMarketRequest updateMarketRequest) {
+    public ResponseEntity<ResponseEnvelope<Void>> updateMarket(@RequestBody @Validated UpdateMarketRequest updateMarketRequest) {
         log.info(">> Inicia de modificación del mercado: " + updateMarketRequest.getCode());
         putModifyMarketPort.updatesMarket(updateMarketRequest.toCommand());
         log.info("<< Finalizó la modificación del mercado");
-        return new ResponseEnvelope<>(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.getReasonPhrase());
+        ResponseEnvelope<Void> envelope = new ResponseEnvelope<>(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.getReasonPhrase());
+        return new ResponseEntity<>(envelope, HttpStatus.NO_CONTENT);
     }
     @DeleteMapping("/{marketCode}")
-    public ResponseEnvelope<Void> deleteMarket(@PathVariable String marketCode) {
+    public ResponseEntity<ResponseEnvelope<Void>> deleteMarket(@PathVariable String marketCode) {
         log.info(">> Inicio de eliminación de mercado: " + marketCode);
         deleteMarketPort.deleteMarket(marketCode);
         log.info("<< Finalizó la eliminación de mercado");
-        return new ResponseEnvelope<>(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.getReasonPhrase());
+        ResponseEnvelope<Void> envelope = new ResponseEnvelope<>(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.getReasonPhrase());
+        return new ResponseEntity<>(envelope, HttpStatus.NO_CONTENT);
     }
 }

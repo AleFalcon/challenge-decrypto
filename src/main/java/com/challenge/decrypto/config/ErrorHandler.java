@@ -41,11 +41,11 @@ public class ErrorHandler {
     @ExceptionHandler(ElementExisteException.class)
     public ResponseEntity<ErrorResponse> handleElementExisteException(ElementExisteException ex) {
         ErrorResponse errorResponse = ErrorResponse.builder()
-                .status(HttpStatus.NOT_FOUND.value())
+                .status(HttpStatus.CONFLICT.value())
                 .message(ex.getMessage())
                 .timestamp(System.currentTimeMillis())
                 .build();
-        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
 
 }

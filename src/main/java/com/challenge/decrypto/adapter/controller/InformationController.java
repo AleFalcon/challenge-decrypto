@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,7 +35,7 @@ public class InformationController {
     @Operation(summary = "Get stats", description = "Devuelve el porcentaje de comitentes por mercado que existen por país.")
     @ApiResponse(responseCode = "200", description = "Successful operation", content = @Content(
             mediaType = "application/json",
-            schema = @Schema(implementation = ResponseEnvelope.class),
+            schema = @Schema(implementation = ResponseEntity.class),
             examples = @ExampleObject(value = "{\n" +
                     "    \"status\": 200,\n" +
                     "    \"message\": \"OK\",\n" +
@@ -66,7 +67,7 @@ public class InformationController {
                     "        }\n" +
                     "    ]\n" +
                     "}")))
-    public ResponseEnvelope<List<StatsResponse>> getStats() {
+    public ResponseEntity<ResponseEnvelope<List<StatsResponse>>> getStats() {
         List<StatsResponse> result = new ArrayList<>();
         log.info(">> Inicia la obtención y procesamiento de datos");
         List<StatsDomain> statsDomain = getStatsPort.getStats();
@@ -75,6 +76,7 @@ public class InformationController {
             result.add(StatsResponse.fromDomain(statDomain));
         }
         log.info("<< Finalizó el procesamiento");
-        return new ResponseEnvelope<>(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), result);
+        ResponseEnvelope<List<StatsResponse>> envelope = new ResponseEnvelope<>(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), result);
+        return new ResponseEntity<>(envelope, HttpStatus.OK);
     }
 }

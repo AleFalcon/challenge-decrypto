@@ -17,8 +17,10 @@ public class CountryDomain {
 
     public static CountryDomain toDomain(CountryEntity countryEntity){
         Set<MarketDomain> marketsDomain = new HashSet<>();
-        for(MarketEntity marketEntity : countryEntity.getMarkets()){
-            marketsDomain.add(MarketDomain.toDomain(marketEntity));
+        if(countryEntity.getMarkets() != null) {
+            for (MarketEntity marketEntity : countryEntity.getMarkets()) {
+                marketsDomain.add(MarketDomain.toDomain(marketEntity));
+            }
         }
         return CountryDomain.builder()
                 .id(countryEntity.getId())
