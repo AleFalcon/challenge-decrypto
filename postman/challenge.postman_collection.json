@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"description\": \"Comitente3\"\n}",
+							"raw": "{\n    \"description\": \"Comitente8\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,11 +24,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/comitente",
+							"raw": "{{path}}/comitente",
 							"host": [
-								"localhost"
+								"{{path}}"
 							],
-							"port": "8080",
 							"path": [
 								"comitente"
 							]
@@ -51,14 +50,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/comitente/Comitente3/markets",
+							"raw": "{{path}}/comitente/Comitente8/markets",
 							"host": [
-								"localhost"
+								"{{path}}"
 							],
-							"port": "8080",
 							"path": [
 								"comitente",
-								"Comitente3",
+								"Comitente8",
 								"markets"
 							]
 						}
@@ -71,14 +69,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/comitente/Comitente3",
+							"raw": "{{path}}/comitente/Comitente8",
 							"host": [
-								"localhost"
+								"{{path}}"
 							],
-							"port": "8080",
 							"path": [
 								"comitente",
-								"Comitente3"
+								"Comitente8"
 							]
 						}
 					},
@@ -104,11 +101,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/country",
+							"raw": "{{path}}/country",
 							"host": [
-								"localhost"
+								"{{path}}"
 							],
-							"port": "8080",
 							"path": [
 								"country"
 							]
@@ -131,11 +127,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/country",
+							"raw": "{{path}}/country",
 							"host": [
-								"localhost"
+								"{{path}}"
 							],
-							"port": "8080",
 							"path": [
 								"country"
 							]
@@ -149,11 +144,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/country/Colombia",
+							"raw": "{{path}}/country/Colombia",
 							"host": [
-								"localhost"
+								"{{path}}"
 							],
-							"port": "8080",
 							"path": [
 								"country",
 								"Colombia"
@@ -182,11 +176,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/market",
+							"raw": "{{path}}/market",
 							"host": [
-								"localhost"
+								"{{path}}"
 							],
-							"port": "8080",
 							"path": [
 								"market"
 							]
@@ -209,11 +202,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/market",
+							"raw": "{{path}}/market",
 							"host": [
-								"localhost"
+								"{{path}}"
 							],
-							"port": "8080",
 							"path": [
 								"market"
 							]
@@ -227,11 +219,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/market/AAA",
+							"raw": "{{path}}/market/AAA",
 							"host": [
-								"localhost"
+								"{{path}}"
 							],
-							"port": "8080",
 							"path": [
 								"market",
 								"AAA"
@@ -248,13 +239,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/status",
+					"raw": "{{path}}/stats",
 					"host": [
-						"localhost"
+						"{{path}}"
 					],
-					"port": "8080",
 					"path": [
-						"status"
+						"stats"
 					]
 				}
 			},
